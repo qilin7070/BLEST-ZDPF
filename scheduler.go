@@ -139,7 +139,7 @@ pathLoop:
 
 }
 
-func (sch *scheduler) selectBlestPaths(s *session, hasRetransmission bool, hasStreamRetransmission bool, fromPth *path) *path {
+func (sch *scheduler) selectBlestZdpf(s *session, hasRetransmission bool, hasStreamRetransmission bool, fromPth *path) *path {
 	if len(s.paths) <= 1 {
 		if !hasRetransmission && !s.paths[protocol.InitialPathID].SendingAllowed() {
 			return nil
@@ -370,7 +370,7 @@ func (sch *scheduler) selectPath(s *session, hasRetransmission bool, hasStreamRe
 	// XXX Currently round-robin
 	// TODO select the right scheduler dynamically
 	//return sch.selectPathLowLatency(s, hasRetransmission, hasStreamRetransmission, fromPth)
-	return sch.selectBlestPaths(s, hasRetransmission, hasStreamRetransmission, fromPth)
+	return sch.selectBlestZdpf(s, hasRetransmission, hasStreamRetransmission, fromPth)
 	// return sch.selectPathRoundRobin(s, hasRetransmission, hasStreamRetransmission, fromPth)
 }
 
